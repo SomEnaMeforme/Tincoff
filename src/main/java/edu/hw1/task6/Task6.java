@@ -3,17 +3,17 @@ package edu.hw1.task6;
 import static java.util.Arrays.sort;
 
 public class Task6 {
-    private Task6() {}
+    private Task6() {
+    }
 
     private static final int FIRST_NUMBER_WITH_TWO_DIGITS = 10;
     private static final int FIRST_NUMBER_WITH_FOUR_DIGITS = 1000;
     private static final int LAST_NUMBER_WITH_FOUR_DIGITS = 9999;
 
-
     private static final int KAPREKAR_CONSTANT = 6174;
 
     public static int countK(int number) throws IllegalArgumentException {
-        if (!isFourDigitNumberNotEqualsThousand(number) || allDigitsSame(number)) {
+        if (!isFourDigitNumberNotEqualsThousand(number) || allDigitsSameInFourDigitsNumber(number)) {
             throw new IllegalArgumentException();
         }
         return countK(number, 0);
@@ -31,16 +31,14 @@ public class Task6 {
         return countK(max - min, stepCount + 1);
     }
 
-    private static boolean allDigitsSame(int number) {
-        var variableNumber = number;
-        var digitsSame = true;
-        var previousDigit = variableNumber % FIRST_NUMBER_WITH_TWO_DIGITS;
-        while (digitsSame && variableNumber > 0) {
-            variableNumber /= FIRST_NUMBER_WITH_TWO_DIGITS;
-            digitsSame = previousDigit == variableNumber % FIRST_NUMBER_WITH_TWO_DIGITS;
-            previousDigit = variableNumber % FIRST_NUMBER_WITH_TWO_DIGITS;
+    private static boolean allDigitsSameInFourDigitsNumber(int number) {
+        var lastDigit = number % FIRST_NUMBER_WITH_TWO_DIGITS;
+        var numderWithSameDigits = lastDigit;
+        for (var multiplier = FIRST_NUMBER_WITH_TWO_DIGITS; multiplier <= FIRST_NUMBER_WITH_FOUR_DIGITS;
+             multiplier *= FIRST_NUMBER_WITH_TWO_DIGITS) {
+            numderWithSameDigits += multiplier * lastDigit;
         }
-        return variableNumber == 0;
+        return number == numderWithSameDigits;
     }
 
     private static boolean isFourDigitNumberNotEqualsThousand(int number) {

@@ -57,7 +57,7 @@ public class Task1Test {
         var result = Task1.minutesToSeconds(time);
 
         // then
-        assertThat(result).isEqualTo(1);
+        assertThat(result).isEqualTo(-1);
     }
 
 }

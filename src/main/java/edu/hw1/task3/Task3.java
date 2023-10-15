@@ -7,15 +7,22 @@ public class Task3 {
         if (first == null || second == null) {
             throw new NullPointerException();
         }
-        if (!isEmpty(first) && !isEmpty(second)) {
-            return Arrays.stream(first).min().getAsInt() > Arrays.stream(second).min().getAsInt()
-                && Arrays.stream(first).max().getAsInt() < Arrays.stream(second).max().getAsInt();
+        if (isNotEmpty(first) && isNotEmpty(second)) {
+            return getMin(first) > getMin(second) && getMax(first) < getMax(second);
         }
-        return isEmpty(first);
+        return false;
     }
 
-    private static boolean isEmpty(int[] arr) {
-        return arr.length == 0;
+    private static boolean isNotEmpty(int[] arr) {
+        return arr.length > 0;
+    }
+
+    private static int getMin(int[] array) {
+        return Arrays.stream(array).min().getAsInt();
+    }
+
+    private static int getMax(int[] array) {
+        return Arrays.stream(array).max().getAsInt();
     }
 
     private Task3() {

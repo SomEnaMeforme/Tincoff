@@ -18,8 +18,8 @@ public class Task3Test {
         var result2 = Task3.isNestable(emptyArray, notEmptyArray);
         var result3 = Task3.isNestable(notEmptyArray, emptyArray);
         //then
-        assertThat(result1).isTrue();
-        assertThat(result2).isTrue();
+        assertThat(result1).isFalse();
+        assertThat(result2).isFalse();
         assertThat(result3).isFalse();
 
     }

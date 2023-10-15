@@ -8,7 +8,7 @@ public class Task1 {
     public static int minutesToSeconds(String time) {
         var parseData = time.split(":");
         if (!isInputContainsOnlyOneColon(parseData)) {
-            return 1;
+            return -1;
         }
         int minutes;
         int seconds;
@@ -16,19 +16,23 @@ public class Task1 {
             minutes = Integer.parseInt(parseData[0]);
             seconds = Integer.parseInt(parseData[1]);
         } catch (NumberFormatException e) {
-            return 1;
+            return -1;
         }
-        if (!secondsIsValid(seconds) || minutes < 0) {
-            return 1;
+        if (secondsIsInvalid(seconds) || minutesIsInvalid(minutes)) {
+            return -1;
         }
         return minutes * COUNT_SECONDS_IN_MINUTES + seconds;
     }
 
-    private static Boolean secondsIsValid(int seconds) {
-        return seconds < COUNT_SECONDS_IN_MINUTES && seconds >= 0;
+    private static Boolean secondsIsInvalid(int seconds) {
+        return seconds >= COUNT_SECONDS_IN_MINUTES || seconds < 0;
     }
 
     private static Boolean isInputContainsOnlyOneColon(String[] parseData) {
         return parseData.length == 2;
+    }
+
+    private static Boolean minutesIsInvalid(int minutes) {
+        return minutes < 0;
     }
 }

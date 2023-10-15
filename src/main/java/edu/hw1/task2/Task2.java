@@ -6,16 +6,16 @@ public class Task2 {
 
     public static int getCountDigits(int number) {
         var countDigits = 1;
-        var variableNumber = number;
-        while (numberHasMoreThanOneDigit(variableNumber)) {
+        var variableAbsNumber = Math.abs(number);
+        while (numberHasMoreThanOneDigit(variableAbsNumber)) {
             countDigits++;
-            variableNumber /=  FIRST_NUMBER_WITH_TWO_DIGITS;
+            variableAbsNumber /=  FIRST_NUMBER_WITH_TWO_DIGITS;
         }
         return countDigits;
     }
 
     private static boolean numberHasMoreThanOneDigit(int number) {
-        return Math.abs(number) / FIRST_NUMBER_WITH_TWO_DIGITS > 0;
+        return number / FIRST_NUMBER_WITH_TWO_DIGITS > 0;
     }
 
     private Task2() {

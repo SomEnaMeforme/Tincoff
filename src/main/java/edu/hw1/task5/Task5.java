@@ -1,9 +1,8 @@
 package edu.hw1.task5;
 
-import org.jetbrains.annotations.NotNull;
-
 public class Task5 {
-    private Task5() {}
+    private Task5() {
+    }
 
     private static final int LAST_TWO_DIGIT_NUMBER = 99;
     private static final int LAST_ONE_DIGIT_NUMBER = 9;
@@ -22,19 +21,19 @@ public class Task5 {
             && numberHasEvenDigitsCount(number);
     }
 
-    private static boolean numberHasEvenDigitsCount(@NotNull Integer number) {
+    private static boolean numberHasEvenDigitsCount(Integer number) {
         return number.toString().length() % 2 == 0;
     }
 
-    private static boolean numberHasMoreThanTwoDigits(@NotNull Integer number) {
+    private static boolean numberHasMoreThanTwoDigits(int number) {
         return number > LAST_TWO_DIGIT_NUMBER;
     }
 
-    private static boolean numberHasTwoDigits(@NotNull Integer number) {
+    private static boolean numberHasTwoDigits(int number) {
         return number < LAST_TWO_DIGIT_NUMBER && number > LAST_ONE_DIGIT_NUMBER;
     }
 
-    private static int sumDigitsTwoDigitsNumber(@NotNull Integer number) {
+    private static int sumDigitsTwoDigitsNumber(int number) {
         return number % FIRST_NUMBER_WITH_TWO_DIGITS + number / FIRST_NUMBER_WITH_TWO_DIGITS;
     }
 
@@ -42,8 +41,7 @@ public class Task5 {
         var tmpStr = Integer.toString(number);
         var newNumb = new StringBuilder();
         for (var i = 0; i < tmpStr.length(); i += 2) {
-            newNumb.insert(
-                newNumb.length(),
+            newNumb.append(
                 Character.getNumericValue(tmpStr.charAt(i)) + Character.getNumericValue(tmpStr.charAt(i + 1))
             );
         }
@@ -51,7 +49,10 @@ public class Task5 {
     }
 
     private static boolean isPalindrome(String text) {
-        var reverse = new StringBuilder(text).reverse();
-        return text.length() > 1 && (reverse.toString()).equals(text);
+        var isPalindrom = true;
+        for (var ind = 0; ind < text.length() / 2; ind++) {
+            isPalindrom = isPalindrom && text.charAt(ind) == text.charAt(text.length() - ind - 1);
+        }
+        return text.length() > 1 && isPalindrom;
     }
 }
