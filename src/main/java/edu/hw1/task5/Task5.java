@@ -9,8 +9,12 @@ public class Task5 {
     private static final int FIRST_NUMBER_WITH_TWO_DIGITS = 10;
 
     public static boolean isPalindromeDescendant(int number) {
+
         if (!numberHasDescendants(number)) {
             return isPalindrome(Integer.toString(number));
+        }
+        if (isPalindrome(Integer.toString(number))) {
+            return true;
         }
         return isPalindromeDescendant(getDescendant(number));
     }

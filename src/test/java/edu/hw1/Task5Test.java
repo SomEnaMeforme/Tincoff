@@ -9,7 +9,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task5Test {
     @ParameterizedTest
-    @ValueSource(ints = {11211230, 11, 595, 13001120, 23336014, 5801})
+    @ValueSource(ints = {11211230, 11, 595, 13001120, 23336014, 5801, 9889})
     @DisplayName("Тест на проверку работы метода")
     void isWorkCorrectTest(Integer numb) {
         assertThat(Task5.isPalindromeDescendant(numb)).isTrue();
