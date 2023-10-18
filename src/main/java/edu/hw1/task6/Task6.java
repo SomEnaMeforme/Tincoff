@@ -6,9 +6,11 @@ public class Task6 {
     private Task6() {
     }
 
-    private static final int FIRST_NUMBER_WITH_TWO_DIGITS = 10;
+    private static final int FIRST_NUMBER_WITH_SAME_DIGITS = 1111;
     private static final int FIRST_NUMBER_WITH_FOUR_DIGITS = 1000;
     private static final int LAST_NUMBER_WITH_FOUR_DIGITS = 9999;
+
+
 
     private static final int KAPREKAR_CONSTANT = 6174;
 
@@ -32,13 +34,7 @@ public class Task6 {
     }
 
     private static boolean allDigitsSameInFourDigitsNumber(int number) {
-        var lastDigit = number % FIRST_NUMBER_WITH_TWO_DIGITS;
-        var numderWithSameDigits = lastDigit;
-        for (var multiplier = FIRST_NUMBER_WITH_TWO_DIGITS; multiplier <= FIRST_NUMBER_WITH_FOUR_DIGITS;
-             multiplier *= FIRST_NUMBER_WITH_TWO_DIGITS) {
-            numderWithSameDigits += multiplier * lastDigit;
-        }
-        return number == numderWithSameDigits;
+        return number % FIRST_NUMBER_WITH_SAME_DIGITS == 0;
     }
 
     private static boolean isFourDigitNumberNotEqualsThousand(int number) {
