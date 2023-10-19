@@ -1,18 +1,14 @@
 package edu.hw2;
 
-import edu.hw1.EvenArrayUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import javax.management.OperationsException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static edu.hw2.Task1.Expr.Constant;
 import static edu.hw2.Task1.Expr.Addition;
 import static edu.hw2.Task1.Expr.Exponent;
 import static edu.hw2.Task1.Expr.Multiplication;
 import static edu.hw2.Task1.Expr.Negate;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class Task1Test {
     @Test
