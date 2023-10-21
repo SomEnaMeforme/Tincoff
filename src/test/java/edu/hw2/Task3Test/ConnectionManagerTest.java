@@ -3,6 +3,7 @@ package edu.hw2.Task3Test;
 import edu.hw2.Task3.ConnectionManager;
 import edu.hw2.Task3.DefaultConnectionManager;
 import edu.hw2.Task3.FaultyConnection;
+import edu.hw2.Task3.FaultyConnectionManager;
 import edu.hw2.Task3.StableConnection;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -38,7 +39,7 @@ public class ConnectionManagerTest {
 
     @Test
     void FaultyConnectionManagerAlwaysReturnFaultyConnectionTest() {
-        var manager = new DefaultConnectionManager();
+        var manager = new FaultyConnectionManager();
         assertThat(manager.getConnection() instanceof FaultyConnection).isTrue();
     }
 }
