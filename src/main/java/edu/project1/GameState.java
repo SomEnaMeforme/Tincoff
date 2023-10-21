@@ -1,33 +1,28 @@
 package edu.project1;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 public class GameState {
-    public boolean isGameEnd() {
-        return current_attempt < MAX_ATTEMPTS_COUNT;
-    }
-
-    private final int MAX_ATTEMPTS_COUNT = 9;
+    public final String word;
+    public final Set<Character> guessedLetters = new HashSet<Character>();
+    public final Set<Character> usedLetters = new HashSet<Character>();
     private int current_attempt = 1;
-    private String word = "";
 
-    public void Guess(char choicedLetter) {
-        if (word.indexOf(choicedLetter) >= 0) {
-            SuccessGuess();
-        } else {
-            FailGuess();
-        }
-        OnGuess();
-
+    public GameState() {
+        word = Words.getRandomWord();
     }
 
-    public void SuccessGuess() {
-
+    public int getCurrentAttempt() {
+        return current_attempt;
     }
-
-    public void FailGuess() {
+    public void newAttempt() {
         current_attempt++;
     }
 
-    public void OnGuess() {
-
+    public boolean isWordGuessed() {
+        return guessedLetters.containsAll(Arrays.asList(word.toCharArray()));
     }
 }
