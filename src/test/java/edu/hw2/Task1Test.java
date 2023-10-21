@@ -9,7 +9,6 @@ import static edu.hw2.Task1.Expr.Exponent;
 import static edu.hw2.Task1.Expr.Multiplication;
 import static edu.hw2.Task1.Expr.Negate;
 
-
 public class Task1Test {
     @Test
     @DisplayName("Для положительных входных значений, Negate возвращает отрицательное значение")
@@ -18,6 +17,7 @@ public class Task1Test {
         var negative = new Negate(positiveConst);
         assertThat(negative.evaluate()).isEqualTo(-4.5);
     }
+
     @Test
     @DisplayName("Для отрицательных входных значений Negate возвращает отрицательное значение")
     void negateFromNegativeConstReturnNegativeTest() {
@@ -40,6 +40,7 @@ public class Task1Test {
         assertThat(new Multiplication(new Constant(4), 0.8).evaluate()).isEqualTo(3.2);
         assertThat(new Multiplication(4, new Constant(0.8)).evaluate()).isEqualTo(3.2);
     }
+
     @Test
     @DisplayName("Тестирование входных значений для Addition")
     void inputToAdditionTest() {
@@ -47,6 +48,7 @@ public class Task1Test {
         assertThat(new Addition(new Constant(4), 0.8).evaluate()).isEqualTo(4.8);
         assertThat(new Addition(4, new Constant(0.8)).evaluate()).isEqualTo(4.8);
     }
+
     @Test
     @DisplayName("Тестирование входных значений для Addition")
     void inputToExponentTest() {

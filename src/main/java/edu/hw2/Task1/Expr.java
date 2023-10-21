@@ -1,11 +1,5 @@
 package edu.hw2.Task1;
 
-import static edu.hw2.Task1.Expr.Constant;
-import static edu.hw2.Task1.Expr.Addition;
-import static edu.hw2.Task1.Expr.Exponent;
-import static edu.hw2.Task1.Expr.Multiplication;
-import static edu.hw2.Task1.Expr.Negate;
-
 public sealed interface Expr {
     double evaluate();
 
@@ -20,6 +14,7 @@ public sealed interface Expr {
         public Negate(Expr numb) {
             this(numb.evaluate());
         }
+
         @Override
         public double evaluate() {
             return number > 0 ? number * -1 : number;
@@ -30,9 +25,11 @@ public sealed interface Expr {
         public Exponent(Expr first, double second) {
             this(first.evaluate(), second);
         }
+
         public Exponent(Expr first, Expr second) {
             this(first.evaluate(), second.evaluate());
         }
+
         public Exponent(double first, Expr second) {
             this(first, second.evaluate());
         }
@@ -47,9 +44,11 @@ public sealed interface Expr {
         public Addition(Expr first, Expr second) {
             this(first.evaluate(), second.evaluate());
         }
+
         public Addition(Expr first, double second) {
             this(first.evaluate(), second);
         }
+
         public Addition(double first, Expr second) {
             this(second, first);
         }
@@ -65,9 +64,11 @@ public sealed interface Expr {
         public Multiplication(Expr first, Expr second) {
             this(first.evaluate(), second.evaluate());
         }
+
         public Multiplication(Expr first, double second) {
             this(first.evaluate(), second);
         }
+
         public Multiplication(double first, Expr second) {
             this(second, first);
         }

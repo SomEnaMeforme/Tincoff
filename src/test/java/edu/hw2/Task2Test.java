@@ -9,16 +9,18 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task2Test {
     static Arguments[] rectangles() {
-        return new Arguments[]{
+        return new Arguments[] {
             Arguments.of(new Rectangle(2, 2)),
             Arguments.of(new Square(2))
         };
     }
+
     @ParameterizedTest
     @MethodSource("rectangles")
     void rectangleArea(Rectangle rect) {
         assertThat(rect.area()).isEqualTo(4.0);
     }
+
     @ParameterizedTest
     @MethodSource("rectangles")
     void rectangleAreaWithChangeParameters(Rectangle rect) {
