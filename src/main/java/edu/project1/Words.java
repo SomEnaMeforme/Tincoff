@@ -3,15 +3,18 @@ package edu.project1;
 import java.util.Random;
 
 public class Words {
-    public static final String[] dictionary = new String[] {
+    private Words() {
+    }
+
+    public static final String[] DICTIONARY = new String[] {
         "database",
         "namespace",
         "validation",
-        "debug",
+        "programming",
         "variable"};
 
     public static String getRandomWord() {
-        var rndIndex = new Random().nextInt(dictionary.length);
-        return dictionary[rndIndex];
+        var rndIndex = new Random().nextInt(DICTIONARY.length);
+        return DICTIONARY[rndIndex];
     }
 }

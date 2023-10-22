@@ -1,39 +1,54 @@
 package edu.project1;
 
+import java.io.InputStream;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import java.util.Arrays;
-import java.util.Scanner;
+import org.jetbrains.annotations.NotNull;
 
 public class Console {
-    private Console() {}
-    private final static Scanner consoleInput = new Scanner(System.in);
+    private Console() {
+    }
+
+    public static void setStream(InputStream stream) {
+        consoleInput = new Scanner(stream);
+    }
+
+    private static Scanner consoleInput = new Scanner(System.in);
     private final static Logger LOGGER = LogManager.getLogger();
 
-    public static char guess() {
+    public static String guess() throws NoSuchElementException, IndexOutOfBoundsException {
         LOGGER.info("Guess the letter: ");
-        return consoleInput.nextLine().charAt(0);
+        return consoleInput.nextLine();
     }
-    public static void startGame() {
+
+    public static void logStartGame() {
         LOGGER.info("Game started!");
     }
 
-    public static void printWord(GameState state) {
+    public static void printWord(@NotNull String word, @NotNull Set<Character> displayedLetters) {
         var encryptedWord = new StringBuilder();
-        for (var symbol : state.word.toCharArray()) {
-            encryptedWord.append(state.guessedLetters.contains(symbol) ? symbol : "#");
+        for (var symbol : word.toCharArray()) {
+            encryptedWord.append(displayedLetters.contains(symbol) ? symbol : "#");
         }
         LOGGER.info(encryptedWord);
     }
-    public static void printGuessResult(boolean isSuccessGuess) {
 
+    public static void printGuessResult(boolean isSuccessGuess) {
+        LOGGER.info(isSuccessGuess ? "Hit!" : "Missed");
+    }
+
+    public static void printRemainingAttempts(int maxAttempts, int remainingAttempts) {
+        LOGGER.info(String.format("Left %d attempts out of %d", remainingAttempts, maxAttempts));
     }
 
     public static void playerWin() {
-
+        LOGGER.info("You won!");
     }
 
     public static void playerLose() {
-
+        LOGGER.info("You lost!");
     }
 }

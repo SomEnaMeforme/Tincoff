@@ -1,56 +1,93 @@
 package edu.project1;
-import java.util.Scanner;
-import java.awt.event.KeyEvent;
+
+import java.util.NoSuchElementException;
 
 public class Game {
 
-    private Game(int max_attempts) {
-        MAX_ATTEMPTS_COUNT = max_attempts;
+    private Game() {
         state = new GameState();
     }
-    private final int MAX_ATTEMPTS_COUNT;
+
+    private final int maxAttemptsCount = 9;
     private final GameState state;
+    private boolean earlyCompletion = false;
+
     public boolean isGameEnd() {
-        if (state.isWordGuessed()) {
-            endGame(true);
-            return true;
-        };
-        if (state.getCurrentAttempt() > MAX_ATTEMPTS_COUNT) {
-            endGame(false);
-        }
-        return false;
+        return state.getCurrentAttempt() >= maxAttemptsCount || state.isWordGuessed() || earlyCompletion;
     }
 
-    public static Game StartGame() {
-        return new Game(9);
+    public static Game startGame() {
+        Console.logStartGame();
+        return new Game();
     }
 
     public void guess() {
-        var chosenLetter = Console.guess();
-        onGuess(chosenLetter);
-        if (state.word.indexOf(chosenLetter) >= 0) {
-            successGuess(chosenLetter);
+        Console.printWord(state.word, state.guessedLetters);
+        char chosenLetter;
+        boolean invalidInput;
+        try {
+            var input = Console.guess();
+            invalidInput = input.length() > 1;
+            chosenLetter = input.charAt(0);
+        } catch (Exception e) {
+            if (e instanceof NoSuchElementException) {
+                giveUp();
+            } else {
+                failGuess();
+            }
+            return;
         }
-        else {
+        if (!invalidInput && state.word.indexOf(chosenLetter) >= 0 && !state.usedLetters.contains(chosenLetter)) {
+            successGuess(chosenLetter);
+        } else {
             failGuess();
         }
+        if (!invalidInput) {
+            onGuess(chosenLetter);
+        }
     }
 
-    public void successGuess(char letter) {
+    private void successGuess(char letter) {
         state.guessedLetters.add(letter);
         Console.printGuessResult(true);
+        if (state.isWordGuessed()) {
+            endGame(true);
+        }
     }
 
-    public void failGuess() {
+    private void failGuess() {
         state.newAttempt();
         Console.printGuessResult(false);
+        Console.printRemainingAttempts(maxAttemptsCount, getRemainingAttemptsCount());
+        if (state.getCurrentAttempt() >= maxAttemptsCount) {
+            endGame(false);
+        }
     }
 
-    public void onGuess(char letter) {
+    public int getRemainingAttemptsCount() {
+        return maxAttemptsCount - state.getCurrentAttempt();
+    }
+
+    private void onGuess(char letter) {
         state.usedLetters.add(letter);
     }
-    public void endGame(boolean isPlayerWin) {
+
+    private void endGame(boolean isPlayerWin) {
+        if (isPlayerWin) {
+            Console.playerWin();
+        } else {
+            Console.playerLose();
+        }
 
     }
 
+    private void giveUp() {
+        earlyCompletion = true;
+        endGame(false);
+    }
+
+    //Нужен для тестов
+    public GameState getState() {
+        return state;
+    }
 }

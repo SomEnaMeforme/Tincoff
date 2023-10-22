@@ -1,28 +1,27 @@
 package edu.project1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 public class GameState {
     public final String word;
-    public final Set<Character> guessedLetters = new HashSet<Character>();
-    public final Set<Character> usedLetters = new HashSet<Character>();
-    private int current_attempt = 1;
+    public final Set<Character> guessedLetters = new HashSet<>();
+    public final Set<Character> usedLetters = new HashSet<>();
+    private int currentAttempt = 0;
 
     public GameState() {
         word = Words.getRandomWord();
     }
 
     public int getCurrentAttempt() {
-        return current_attempt;
+        return currentAttempt;
     }
+
     public void newAttempt() {
-        current_attempt++;
+        currentAttempt++;
     }
 
     public boolean isWordGuessed() {
-        return guessedLetters.containsAll(Arrays.asList(word.toCharArray()));
+        return word.chars().allMatch(x -> guessedLetters.contains((char) x));
     }
 }
