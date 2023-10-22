@@ -1,10 +1,8 @@
 package edu.project1;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import edu.hw1.task0_task1.Task0;
 
 public final class Main {
-    private final static Logger LOGGER = LogManager.getLogger();
 
     private Main() {
     }
@@ -15,5 +13,6 @@ public final class Main {
         while (!game.isGameEnd()) {
             game.guess();
         }
+
     }
 }
