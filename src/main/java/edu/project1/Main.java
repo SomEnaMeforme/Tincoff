@@ -7,7 +7,9 @@ public final class Main {
 
     private Main() {
     }
+
     private final static Logger LOGGER = LogManager.getLogger();
+
     public static void main(String[] args) {
         LOGGER.info("Hello and welcome!");
         var game = Game.startGame();
