@@ -18,13 +18,20 @@ public final class PopularCommandExecutor {
     }
 
     void tryExecute(String command) {
+        Exception cause = null;
         for (var i = 0; i < maxAttempts; i++) {
             try (var connection = manager.getConnection()) {
                 connection.execute(command);
+                break;
             } catch (Exception e) {
                 LOGGER.info("Faulty connection return when you try execute command exception");
-                throw new ConnectionException("The command sent could not be executed", e);
+                if (i + 1 == maxAttempts) {
+                    cause = e;
+                }
             }
+        }
+        if (cause != null) {
+            throw new ConnectionException("The command sent could not be executed", cause);
         }
     }
 }

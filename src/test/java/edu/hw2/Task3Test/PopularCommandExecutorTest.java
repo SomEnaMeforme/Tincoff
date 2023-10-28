@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class PopularCommandExecutorTest {
     @Test
     void PopularExecutorMayReturnFailsTest() {
-        var executor = new PopularCommandExecutor(3, new DefaultConnectionManager());
+        var executor = new PopularCommandExecutor(1, new DefaultConnectionManager());
         assertThrows(ConnectionException.class, () -> {
-            for (var i = 0; i < 10; i++) {
+            for (var i = 0; i < 100; i++) {
                 executor.updatePackages();
             }
         });
