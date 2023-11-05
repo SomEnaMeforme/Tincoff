@@ -18,7 +18,7 @@ public class AnimalCounterTest {
             new Animal("Marta", Animal.Type.SPIDER, Animal.Sex.F, 1, 100, 11, true),
             new Animal("Morty", Animal.Type.SPIDER, Animal.Sex.M, 12, 1, 11, true),
             new Animal("Flower", Animal.Type.BIRD, Animal.Sex.F, 4, 19, 2, false),
-            new Animal("Felix", Animal.Type.DOG,Animal.Sex.M, 8,46,8,true)};
+            new Animal("Felix", Animal.Type.DOG,Animal.Sex.M, 8,46,8,false)};
         assertThat(areSpidersBitesMoreOftenThanDogTask17(Arrays.stream(animals).toList())).isEqualTo(true);
     }
     @Test
