@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Stack;
 
-public class SolverDFS implements Solver{
+public class SolverDFS implements Solver {
     @Override
     public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
         var adjacency = getAdjacencyList(maze);
@@ -14,13 +14,13 @@ public class SolverDFS implements Solver{
         var parents = new HashMap<Coordinate, Coordinate>();
         var stack = new Stack<Coordinate>();
         stack.push(start);
-        while(!stack.empty()) {
+        while (!stack.empty()) {
             var curCell = stack.pop();
             if (curCell.equals(end)) {
                 var result = new ArrayList<Coordinate>();
                 result.add(end);
                 var child = end;
-                while(parents.containsKey(child)) {
+                while (parents.containsKey(child)) {
                     var parent = parents.get(child);
                     result.add(parent);
                 }
@@ -38,13 +38,15 @@ public class SolverDFS implements Solver{
 
     private HashMap<Coordinate, ArrayList<Coordinate>> getAdjacencyList(Maze maze) {
         var result = new HashMap<Coordinate, ArrayList<Coordinate>>();
-        for (var y = 0; y < maze.height; y++)
-            for(var x = 0; x < maze.width; x++) {
+        for (var y = 0; y < maze.height; y++) {
+            for (var x = 0; x < maze.width; x++) {
                 var cellCoor = maze.grid[y][x].coor();
                 result.put(cellCoor, getConnectedCells(maze, cellCoor));
             }
+        }
         return result;
     }
+
     private ArrayList<Coordinate> getConnectedCells(Maze maze, Coordinate curCell) {
         var connectedCells = new ArrayList<Coordinate>();
         if (curCell.row() > 0 && !maze.grid[curCell.col()][curCell.row() - 1].hasRightWall()) {

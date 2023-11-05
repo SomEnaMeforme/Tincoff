@@ -6,6 +6,7 @@ public class Maze {
         this.height = height;
         this.width = width;
     }
+
     public final int height;
     public final int width;
     public final Cell[][] grid;
