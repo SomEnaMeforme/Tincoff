@@ -15,7 +15,7 @@ public class BackwardIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return list.size() - current > 0;
+        return list.size() > current;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class BackwardIterator<T> implements Iterator<T> {
             throw new NoSuchElementException();
         }
         var value = list.get(list.size() - current - 1);
-        current += 1;
+        current++;
         return value;
     }
 }

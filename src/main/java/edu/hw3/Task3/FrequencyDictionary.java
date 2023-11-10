@@ -9,11 +9,8 @@ public class FrequencyDictionary {
     public static <K> Hashtable<K, Integer> freqDict(K[] inputArray) {
         var result = new Hashtable<K, Integer>();
         for (var element : inputArray) {
-            if (!result.containsKey(element)) {
-                result.put(element, 1);
-            } else {
-                result.put(element, result.get(element) + 1);
-            }
+            result.putIfAbsent(element, 0);
+            result.put(element, result.get(element) + 1);
         }
         return result;
     }

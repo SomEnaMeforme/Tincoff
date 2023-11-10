@@ -2,6 +2,7 @@ package edu.hw3.Task5;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Hashtable;
 import java.util.TreeSet;
 
 public class ContactsParser {
@@ -13,33 +14,37 @@ public class ContactsParser {
         DESC
     }
 
-    private static int comparator(String o1, String o2) {
-        var fullName1 = o1.split(" ");
-        var fullName2 = o2.split(" ");
-        if (fullName1.length < 2 && fullName2.length < 2) {
-            return o1.compareTo(o2);
+    private static int comparator(FullName o1, FullName o2) {
+        if (o1.surname() == null && o2.surname() == null) {
+            return o1.name().compareTo(o2.name());
         }
-        if (fullName1.length < 2 || fullName2.length < 2) {
-            return fullName1.length < 2 ? fullName1[0].compareTo(fullName2[1])
-                : fullName1[1].compareTo(fullName2[0]);
+        if (o1.surname() == null || o2.surname() == null) {
+            return o1.surname() == null ? o1.name().compareTo(o2.surname())
+                : o1.surname().compareTo(o2.name());
         }
-        return fullName1[1].compareTo(fullName2[1]) == 0
-            ? fullName1[0].compareTo(fullName2[0])
-            : fullName1[1].compareTo(fullName2[1]);
+        return o1.surname().compareTo(o2.surname()) == 0
+            ? o1.name().compareTo(o2.name())
+            : o1.surname().compareTo(o2.surname());
     }
 
     public static Object[] parseContacts(String[] contacts, ParseMode mode) {
         if (contacts == null) {
             return new Object[0];
         }
-        Comparator<String> comparator;
+        var newContacts = Arrays.stream(contacts).map(contact -> contact.split(" "))
+            .map(contact -> new FullName(contact[0], contact.length > 1 ? contact[1] : null)).toList();
+        var map = new Hashtable<FullName, String>();
+        for (var i = 0; i < contacts.length; i++) {
+            map.put(newContacts.get(i), contacts[i]);
+        }
+        Comparator<FullName> comparator;
         if (mode == ParseMode.ASC) {
             comparator = ContactsParser::comparator;
         } else {
             comparator = (o1, o2) -> comparator(o2, o1);
         }
         var result = new TreeSet<>(comparator);
-        result.addAll(Arrays.asList(contacts));
-        return result.toArray();
+        result.addAll(newContacts);
+        return result.stream().map(map::get).toArray();
     }
 }
