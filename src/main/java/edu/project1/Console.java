@@ -3,7 +3,6 @@ package edu.project1;
 import java.io.InputStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -28,12 +27,8 @@ public class Console {
         LOGGER.info("Game started!");
     }
 
-    public static void printWord(@NotNull String word, @NotNull Set<Character> displayedLetters) {
-        var encryptedWord = new StringBuilder();
-        for (var symbol : word.toCharArray()) {
-            encryptedWord.append(displayedLetters.contains(symbol) ? symbol : "#");
-        }
-        LOGGER.info(encryptedWord);
+    public static void printWord(@NotNull String displayedWord) {
+        LOGGER.info(displayedWord);
     }
 
     public static void printGuessResult(boolean isSuccessGuess) {

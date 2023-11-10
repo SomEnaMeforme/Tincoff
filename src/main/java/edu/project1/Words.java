@@ -6,7 +6,7 @@ public class Words {
     private Words() {
     }
 
-    public static final String[] DICTIONARY = new String[] {
+    private static final String[] DICTIONARY = new String[] {
         "database",
         "namespace",
         "validation",
@@ -16,5 +16,10 @@ public class Words {
     public static String getRandomWord() {
         var rndIndex = new Random().nextInt(DICTIONARY.length);
         return DICTIONARY[rndIndex];
+    }
+
+    //для проверки корректности словаря в тестах
+    public static String[] getDictionary() {
+        return DICTIONARY;
     }
 }

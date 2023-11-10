@@ -22,20 +22,18 @@ public class Game {
     }
 
     public void guess() {
-        Console.printWord(state.word, state.guessedLetters);
-        char chosenLetter;
+        Console.printWord(state.displayedWord());
+        char chosenLetter = 0;
         boolean invalidInput;
         try {
             var input = Console.guess();
             invalidInput = input.length() > 1;
             chosenLetter = input.charAt(0);
-        } catch (Exception e) {
-            if (e instanceof NoSuchElementException) {
-                giveUp();
-            } else {
-                failGuess();
-            }
+        } catch (NoSuchElementException e) {
+            giveUp();
             return;
+        } catch (Exception e) {
+            invalidInput = true;
         }
         if (!invalidInput && state.word.indexOf(chosenLetter) >= 0 && !state.usedLetters.contains(chosenLetter)) {
             successGuess(chosenLetter);
@@ -50,6 +48,7 @@ public class Game {
     private void successGuess(char letter) {
         state.guessedLetters.add(letter);
         Console.printGuessResult(true);
+        state.changeDisplayedWordOnSuccessGuess(letter);
         if (state.isWordGuessed()) {
             endGame(true);
         }

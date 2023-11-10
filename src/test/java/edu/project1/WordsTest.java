@@ -8,14 +8,14 @@ public class WordsTest {
     @Test
     public void randomWordReturnWordFromDictionaryTest() {
         var word = Words.getRandomWord();
-        assertThat(Arrays.asList(Words.DICTIONARY).contains(word)).isTrue();
+        assertThat(Arrays.asList(Words.getDictionary()).contains(word)).isTrue();
     }
     @Test
     public void dictionaryContainsWordsTest() {
-        assertThat(Arrays.stream(Words.DICTIONARY).findAny().isPresent()).isTrue();
+        assertThat(Arrays.stream(Words.getDictionary()).findAny().isPresent()).isTrue();
     }
     @Test
     public void dictionaryContainsCorrectWordsTest() {
-        assertThat(Arrays.stream(Words.DICTIONARY).allMatch(str -> str.length() > 5 && str.matches("[a-z]+"))).isTrue();
+        assertThat(Arrays.stream(Words.getDictionary()).allMatch(str -> str.length() > 5 && str.matches("[a-z]+"))).isTrue();
     }
 }
