@@ -10,9 +10,9 @@ public class OneThreadCalculatePI {
     private final Random rnd = new Random();
     private final int multiplier = 4;
 
-    public int calculate(int iterationsCount) {
+    public double calculate(int iterationsCount) {
         calculateDotCount(iterationsCount);
-        return multiplier * (circleCount / totalCount);
+        return multiplier * (circleCount / (double) totalCount);
     }
 
     private void calculateDotCount(int iterationsCount) {

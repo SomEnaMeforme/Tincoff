@@ -7,9 +7,9 @@ public class ManyThreadCalculatePI {
 
     private final int threadsCount = 8;
 
-    public int calculate(int iterationsCount) {
+    public double calculate(int iterationsCount) {
         calculateWithThreads(iterationsCount);
-        return multiplier * (circleCount / totalCount);
+        return multiplier * (circleCount / (double) totalCount);
     }
 
     private void calculateWithThreads(int iterationsCount) {
